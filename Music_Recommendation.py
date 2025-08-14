@@ -40,7 +40,7 @@ st.markdown(
     "<h1 style='text-align:center; color:#ff6600;'>🎵 AI Music Recommendation</h1>",
     unsafe_allow_html=True
 )
-st.write("<p style='color:white;'>Get music recommendations based on your mood and favorite singer.</p>",unsafe_allow_html=True)
+st.write("<p style='color:white; text-align:center;'>Get music recommendations based on your mood and favorite singer.</p>",unsafe_allow_html=True)
 
 # Mood options
 moods = [
@@ -180,3 +180,4 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
+
