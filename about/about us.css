@@ -1,0 +1,224 @@
+* {
+  font-family: 'Poppins', sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: #151F28;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns = 4 cards total (2x2) */
+  grid-row-gap: 5rem;
+  grid-column-gap: 2rem;
+  width: 90%;
+  max-width: 1200px;
+  place-items: center;
+}
+
+/* Card base */
+.card {
+  --clr: #35a7ff;             /* default color if not overridden inline */
+  position: relative;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
+/* Expand card on hover */
+.card:hover {
+  width: 600px;
+  height: 350px;
+  border-radius: 20px;
+  transition-delay: 0.5s;
+}
+
+/* Inner circle container */
+.card .circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px; /* will look rounded when expanded */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Outer ring and background transform */
+.card .circle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  border: 8px solid var(--clr);
+  background: #191919;
+  transition: 0.5s, background 0.5s;
+  transition-delay: 0.75s, 1s;
+  filter: drop-shadow(0 0 10px var(--clr)) drop-shadow(0 0 60px var(--clr));
+}
+
+.card:hover .circle::before {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: var(--clr);
+  transition-delay: 0.5s;
+}
+
+/* Center logo (shrinks away on hover) */
+.card .circle .logo {
+  position: relative;
+  width: 250px;
+  transition: 0.5s;
+  transition-delay: 0.5s;
+}
+
+.card:hover .circle .logo {
+  transform: scale(0);
+  transition-delay: 0s;
+}
+
+/* Profile/product image (grows and moves on hover) */
+.card .product_img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0) rotate(315deg);
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  transition: 0.5s ease-in-out;
+  object-fit: cover;
+}
+
+.card:hover .product_img {
+  transition-delay: 0.75s;
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  top: 50%;
+  left: 77%;
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+/* Text content (appears on hover) */
+.card .content {
+  position: absolute;
+  width: 50%;
+  left: 20%;
+  padding: 20px 20px 20px 40px;
+  opacity: 0;
+  transition: 0.5s;
+  visibility: hidden;
+}
+
+.card:hover .content {
+  transition-delay: 0.75s;
+  opacity: 1;
+  visibility: visible;
+  left: 0;
+}
+
+.card .content h2 {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 2.4em;
+  line-height: 1em;
+  margin-bottom: 10px;
+}
+
+.card .content p {
+  color: #fff;
+  line-height: 1.4em;
+}
+
+.card .content a {
+  position: relative;
+  color: #111;
+  background: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* Social icons */
+.card .content .social-icons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.card .content .social-icons a {
+  color: #060606;
+  font-size: 1.2em;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+
+/* Hover colors for socials */
+.card .content .social-icons a.facebook:hover {
+  color: #3b5998;
+}
+.card .content .social-icons a.twitter:hover {
+  color: #1da1f2;
+}
+.card .content .social-icons a.instagram:hover {
+  color: #c32aa3;
+}
+.card .content .social-icons a.github:hover {
+  color: #454343;
+}
+
+/* Responsive tweaks */
+@media (max-width: 1200px) {
+  .cards-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .card:hover {
+    width: 520px;
+  }
+}
+@media (max-width: 800px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+    grid-row-gap: 3rem;
+  }
+  .card,
+  .card:hover {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+  }
+  .card:hover .product_img {
+    left: 50%;
+    top: 68%;
+    height: 200px;
+    width: 200px;
+  }
+  .card .content,
+  .card:hover .content {
+    width: 85%;
+    left: 0;
+    padding: 15px;
+    text-align: center;
+  }
+}
